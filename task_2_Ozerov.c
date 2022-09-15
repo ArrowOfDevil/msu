@@ -1,36 +1,45 @@
 #include <stdio.h>
 #include <math.h>
 #include <windows.h>
+#include <stdlib.h>
 int main() {
   SetConsoleOutputCP(CP_UTF8);
-  int count = 0;
-  double S, x, a, b, p, avg, a_n, sum = 0;
-  double s1, s2, s3, i;
-  scanf("%lf%lf%lf", &x, &a, &b);
-  s1 = sin(abs(x * x + a * x + b));
-  s2 = abs(x * x + a * x + b) + 1e-5;
-  s3 = cos(abs(x * x + a * x + b)) + x;
-  S = s1 * s3 / s2;
-  printf("%lf \n", S);
-  printf("task 2\nВведите сумму покупки и нажмите <Enter>\n");
-  scanf("%lf", &p);
-  if (p >= 1000) {
-    printf("Вам предоставляется скидка 10% \n");
-    i = p - 0.1 * p;
-    printf("Сумма покупки с учетом скидки: %lf руб.", i);
+  //перечисляем переменные из условий
+  double x, y, z;
+  int n, count = 0, ans;
+  //перечисляем промежуточные значения
+  double a1, a2, a3;
+  printf("Task 1\n");
+  printf("Введите значения x и y\n");
+  scanf("%lf%lf", &x, &y);
+  a1 = sqrt(9 + sin((x + y) * (x + y)));
+  a2 = pow(sin((x + y) * (x + y)), 2) + y * y + 2 * 1e-5;
+  a3 = (-exp((x + y) * (x + y))) + 1. / 3;
+  z = a1 / a2 + a3;
+  printf("z = %lf", z);
+  printf("\nTask 2\n");
+  printf("Введите число\n");
+  scanf("%d", &n);
+  if (n / 3 * 3 != n) printf("Число %d нацело на 3 не делится\n", n);
+  else printf("Число %d делится на 3\n", n);
+  printf("Task 3\n");
+  for (int a = 1, b = 2, i = 0; i < 10; ++i) {
+    a = rand() % 10;
+    b = (rand() +1) % 10;
+    printf("%d) %dx%d=", i + 1, a, b);
+    scanf("%d", &ans);
+    ans == a * b ? ++count : printf("Опа!! Ошибочки! Ответ: %d\n", a * b);
+  }
+  printf("Верных ответов %d/10\n", count);
+  if (count == 10) {
+    printf("Отл");
   } else {
-    printf("Скидки нет, сосите бибу \nК оплате %lf руб.\n", p);
+    if (count < 10 && count > 7) {
+      printf("Хор");
+    } else {
+      if (count < 8 && count > 5) printf("Удов");
+      else printf("Неуд");
+    }
   }
-  printf("task 3\nВведите последовательность заканчивающуюся 0\n");
-  scanf("%lf", &a_n);
-  while (a_n != 0) {
-    count += 1;
-    sum += a_n;
-    avg = sum / count;
-    printf("%d Сумма: %lf Сред, арифметическое: %lf \n", count, sum, avg);
-    scanf("%lf", &a_n);
-  }
-  getchar();
   return 0;
 }
-
