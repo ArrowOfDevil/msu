@@ -4,18 +4,18 @@
 int main() {
   SetConsoleOutputCP(CP_UTF8);
   FILE *f1, *f2, *f3, *f4;
-  char fst[] = R"(C:\Users\Dilya\CLionProjects\untitled8\first.txt)";
-  char snd[] = R"(C:\Users\Dilya\CLionProjects\untitled8\second.txt)";
-  char trd[] = R"(C:\Users\Dilya\CLionProjects\untitled8\third.txt)";
-  char ex2[] = R"(C:\Users\Dilya\CLionProjects\untitled8\ex2.txt)";
+  char fst[] = "C:\\Users\\Dilya\\CLionProjects\\untitled8\\first.txt";
+  char snd[] = "C:\\Users\\Dilya\\CLionProjects\\untitled8\\second.txt";
+  char trd[] = "C:\\Users\\Dilya\\CLionProjects\\untitled8\\third.txt";
+  char ex2[] = "C:\\Users\\Dilya\\CLionProjects\\untitled8\\ex2.txt";
   const int N = 512;// максимальный размер строки в файле
   char ArrChar1[N];
   char ArrChar2[N];
 
-  f1 = fopen(fst, "r+t");
-  f2 = fopen(snd, "r+t");
-  f3 = fopen(trd, "w+t");
-  f4 = fopen(ex2, "a"); //так как неизвестно существует файл или нет, то сначала создадим его с помощью "а"
+  f1 = fopen(fst, "rt");
+  f2 = fopen(snd, "rt");
+  f3 = fopen(trd, "wt");
+  f4 = fopen(ex2, "at"); //так как неизвестно существует файл или нет, то сначала создадим его с помощью "а"
   fclose(f4);
 
   if (!f1) return printf("error opening file1"), -1; // это законно, но правильно ли с точки зрения код стайла (?)
@@ -47,7 +47,7 @@ int main() {
   while (c != 0) {
     switch (c) {
       case 0: break;
-      case 1:f4 = fopen(ex2, "w+t");
+      case 1:f4 = fopen(ex2, "wt");
 
         scanf("%s", str);
         fputs(str, f4);
@@ -55,7 +55,7 @@ int main() {
 
         fclose(f4);
         break;
-      case 2:f4 = fopen(ex2, "a+t");
+      case 2:f4 = fopen(ex2, "at");
 
         scanf("%s", str);
         fputs(str, f4);
@@ -63,7 +63,7 @@ int main() {
 
         fclose(f4);
         break;
-      case 3:f4 = fopen(ex2, "r+");
+      case 3:f4 = fopen(ex2, "rt");
         while (
             fgets(str, sizeof(str), f4) != nullptr)
           fputs(str, stdout);
